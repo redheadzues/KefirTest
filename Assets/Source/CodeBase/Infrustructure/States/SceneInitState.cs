@@ -1,4 +1,6 @@
 ﻿using Assets.Source.CodeBase.Infrustructure.Services;
+using Assets.Source.CodeBase.Infrustructure.StaticData;
+using Assets.Source.CodeBase.Ship;
 
 namespace Assets.Source.CodeBase.Infrustructure.States
 {
@@ -6,18 +8,24 @@ namespace Assets.Source.CodeBase.Infrustructure.States
     {
         private readonly GameStateMachine _gameStateMachine;
         private readonly IShipFactory _shipFactory;
-        private readonly IEnemyFactory _enemyFactory;
+        private readonly IStaticDataService _staticDataService;
+        private readonly IViewFactory _viewFactory;
 
         public SceneInitState(GameStateMachine gameStateMachine, AllServices services)
         {
             _gameStateMachine = gameStateMachine;
-            _shipFactory = services.Single<IShipFactory>();
-            _enemyFactory = services.Single<IEnemyFactory>();
+            _shipFactory = services.Get<IShipFactory>();
+            _staticDataService = services.Get<IStaticDataService>();
+            _viewFactory = services.Get<IViewFactory>();
         }
 
         public void Enter()
         {
-            _shipFactory.CreateShip();
+            ShipStaticData shipStaticData = _staticDataService.GetShipStaticData();
+            ShipModel ship = _shipFactory.CreateShip(shipStaticData);
+
+            _viewFactory.CreateEntityView(ship, shipStaticData.ViewSprite);
+
         }
     }
 }

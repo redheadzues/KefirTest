@@ -6,6 +6,11 @@ namespace Assets.Source.CodeBase.Ship
     {
         private readonly GameTransform _transform;
 
+        public ShipPositionClamper(GameTransform transform)
+        {
+            _transform = transform;
+        }
+
         public void Update(float tick)
         {
             Vector2 position = _transform.Position.Value;

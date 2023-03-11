@@ -4,23 +4,24 @@ namespace Assets.Source.CodeBase.Ship
 {
     public class InertionMove
     {
-        private readonly Observable<Vector2> _velocity;
-        private readonly GameTransform _transform;
-        private readonly float _acceleration;
-        private readonly float _deceleration;
-        private readonly float _maxSpeed;
+        private readonly ShipModel _model;
+
+        public InertionMove(ShipModel model)
+        {
+            _model = model;
+        }
 
         public void Accelerate(float tick)
         {
-            Vector2 forward = _transform.Rotation.Value * Vector2.up;
+            Vector2 forward = _model.Transform.Rotation.Value * Vector2.up;
 
-            _velocity.Value += forward * _acceleration * tick;
-            _velocity.Value = Vector2.ClampMagnitude(_velocity.Value, _maxSpeed);
+            _model.Velocity.Value += forward * _model.Acceleration * tick;
+            _model.Velocity.Value = Vector2.ClampMagnitude(_model.Velocity.Value, _model.MaxSpeed);
         }
 
         public void SlowDown(float tick)
-        { 
-            _velocity.Value -= _velocity.Value.normalized * _deceleration * tick;
+        {
+            _model.Velocity.Value -= _model.Velocity.Value.normalized * _model.Deceleration * tick;
         }
     }
 }

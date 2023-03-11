@@ -1,10 +1,16 @@
-﻿public class Game
-{
-    private GameStateMachine _gameStateMachine;
+﻿using Assets.Source.CodeBase.Infrustructure.Services;
 
-    public Game()
+namespace Assets.Source.CodeBase.Infrustructure
+{
+    public class Game
     {
-        _gameStateMachine = new GameStateMachine();
-        _gameStateMachine.Enter<BootstrapState>();
+        private GameStateMachine _gameStateMachine;
+
+        public Game(IUpdater updater)
+        {
+            _gameStateMachine = new GameStateMachine(new AllServices(), updater);
+            _gameStateMachine.Enter<BootstrapState>();
+        }
     }
+
 }

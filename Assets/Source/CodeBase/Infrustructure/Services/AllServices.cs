@@ -11,7 +11,7 @@
             Implementation<TService>.Instance = implementation;
         }
 
-        public TService Single<TService>() where TService : IService
+        public TService Get<TService>() where TService : IService
         {
             return Implementation<TService>.Instance;
         }

@@ -9,12 +9,12 @@ namespace Assets.Source.CodeBase.Infrustructure
     {
         private readonly Dictionary<Type, IState> _states;
 
-        public GameStateMachine(AllServices services)
+        public GameStateMachine(AllServices services, IUpdater updater)
         {
             _states = new Dictionary<Type, IState>()
             {
-                [typeof(BootstrapState)] = new BootstrapState(this, services),
-                [typeof(SceneInitState)] = new SceneInitState(this),
+                [typeof(BootstrapState)] = new BootstrapState(this, services, updater),
+                [typeof(SceneInitState)] = new SceneInitState(this, services),
 
 
             };

@@ -8,6 +8,12 @@ namespace Assets.Source.CodeBase.Ship
         private readonly InertionMove _inertionMove;
         private readonly ShipRotator _shipRotator;
 
+        public ShipInputRouter(InertionMove inertionMove, ShipRotator shipRotator)
+        {
+            _inertionMove = inertionMove;
+            _shipRotator = shipRotator;
+        }
+
         public void Update(float tick)
         {
             ChangeVelocity(tick);
