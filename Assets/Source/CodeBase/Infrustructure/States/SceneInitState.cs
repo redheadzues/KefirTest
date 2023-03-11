@@ -24,7 +24,7 @@ namespace Assets.Source.CodeBase.Infrustructure.States
             ShipStaticData shipStaticData = _staticDataService.GetShipStaticData();
             ShipModel ship = _shipFactory.CreateShip(shipStaticData);
 
-            _viewFactory.CreateEntityView(ship, shipStaticData.ViewSprite);
+            //_viewFactory.CreateEntityView(ship, shipStaticData.ViewSprite);
 
         }
     }

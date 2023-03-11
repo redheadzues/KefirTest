@@ -2,7 +2,7 @@
 
 namespace Assets.Source.CodeBase
 {
-    public class Observable<T>
+    public class Observable<T> : IReadOnlyObservable<T>
     {
         private T _value;
 
@@ -23,5 +23,11 @@ namespace Assets.Source.CodeBase
         {
             Value = value;
         }   
+    }
+
+    public interface IReadOnlyObservable<T>
+    {
+        event Action<T> ValueChanged;
+        public T Value { get; }
     }
 }
