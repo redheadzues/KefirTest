@@ -1,11 +1,14 @@
 using UnityEngine;
 
-public class GameBootstraper : MonoBehaviour
+namespace Assets.Source.CodeBase.Infrustructure
 {
-    private Game _game;
-
-    private void Awake()
+    public class GameBootstraper : MonoBehaviour
     {
-        _game = new Game();
+        private Game _game;
+
+        private void Awake()
+        {
+            _game = new Game();
+        }
     }
 }

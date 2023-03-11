@@ -1,25 +1,30 @@
-﻿using System;
+﻿using Assets.Source.CodeBase.Infrustructure.Services;
+using Assets.Source.CodeBase.Infrustructure.States;
+using System;
 using System.Collections.Generic;
 
-public class GameStateMachine
+namespace Assets.Source.CodeBase.Infrustructure
 {
-    private readonly Dictionary<Type, IState> _states;
-
-    public GameStateMachine()
+    public class GameStateMachine
     {
-        _states = new Dictionary<Type, IState>()
+        private readonly Dictionary<Type, IState> _states;
+
+        public GameStateMachine(AllServices services)
         {
-            [typeof(BootstrapState)] = new BootstrapState(this),
-            [typeof(SceneInitState)] = new SceneInitState(this),
+            _states = new Dictionary<Type, IState>()
+            {
+                [typeof(BootstrapState)] = new BootstrapState(this, services),
+                [typeof(SceneInitState)] = new SceneInitState(this),
 
 
-        };
+            };
+        }
+
+        public void Enter<TState>() where TState : IState
+        {
+            IState state = _states[typeof(TState)];
+            state.Enter();
+        }
+
     }
-
-    public void Enter<TState>() where TState : IState
-    {
-        IState state = _states[typeof(TState)];
-        state.Enter();
-    }
-
 }
