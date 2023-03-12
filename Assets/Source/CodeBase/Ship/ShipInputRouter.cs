@@ -31,12 +31,8 @@ namespace Assets.Source.CodeBase.Ship
                 _inertionMove.SlowDown(tick);
         }
 
-        private bool CheckAccelerate()
-        {
-            MonoBehaviour.print(_playerInput.Ship.MoveForward.phase == InputActionPhase.Performed);
-
-            return _playerInput.Ship.MoveForward.phase == InputActionPhase.Performed;
-        }
+        private bool CheckAccelerate() => 
+            _playerInput.Ship.MoveForward.phase == InputActionPhase.Performed;
 
         private void Rotate(float tick)
         {

@@ -15,7 +15,6 @@ namespace Assets.Source.CodeBase.Infrustructure.Services
         public void Load()
         {
             _shipData = Resources.Load<ShipStaticData>("ShipStaticData");
-            MonoBehaviour.print(_shipData);
         }
     }
 

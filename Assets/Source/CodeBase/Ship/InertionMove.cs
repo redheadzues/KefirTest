@@ -17,6 +17,7 @@ namespace Assets.Source.CodeBase.Ship
 
             _model.Velocity.Value += forward * _model.Acceleration * tick;
             _model.Velocity.Value = Vector2.ClampMagnitude(_model.Velocity.Value, _model.MaxSpeed);
+            MonoBehaviour.print(_model.Velocity.Value);
         }
 
         public void SlowDown(float tick)
