@@ -1,8 +1,7 @@
 ﻿using Assets.Source.CodeBase.Infrustructure.Factories;
 using Assets.Source.CodeBase.Infrustructure.Services;
-using Assets.Source.CodeBase.Infrustructure.States;
 
-namespace Assets.Source.CodeBase.Infrustructure
+namespace Assets.Source.CodeBase.Infrustructure.States
 {
     public class BootstrapState : IState
     {
@@ -15,11 +14,12 @@ namespace Assets.Source.CodeBase.Infrustructure
             _gameStateMachine = gameStateMachine;
             _services = services;
             _updater = updater;
+            RegisterServices();
         }
 
         public void Enter()
         {
-            RegisterServices();
+
             _services.Get<IStaticDataService>().Load();
             _gameStateMachine.Enter<SceneInitState>();
         }
@@ -27,11 +27,12 @@ namespace Assets.Source.CodeBase.Infrustructure
         private void RegisterServices()
         {
             _services.RegisterSingle(_updater);
+            _services.RegisterSingle<IAsserProvider>(new AssetProvider());
             _services.RegisterSingle<IStaticDataService>(new StaticDataService());
             _services.RegisterSingle<IShipFactory>(new ShipFactory(_services.Get<IUpdater>()));
             _services.RegisterSingle<IEnemyFactory>(new EnemyFactory(_services.Get<IStaticDataService>()));
             _services.RegisterSingle<IUiFactory>(new UiFactory());
-            _services.RegisterSingle<IViewFactory>(new ViewFactory());
+            _services.RegisterSingle<IViewFactory>(new ViewFactory(_services.Get<IAsserProvider>()));
         }
 
     }

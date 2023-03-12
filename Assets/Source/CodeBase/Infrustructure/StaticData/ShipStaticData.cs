@@ -5,6 +5,7 @@ namespace Assets.Source.CodeBase.Infrustructure.StaticData
     [CreateAssetMenu(fileName = "ShipStaticData", menuName = "StaticData/ShipStaticData")]
     public class ShipStaticData : ScriptableObject
     {
+        [field: SerializeField] public EntityType EntityType { get; private set; }
         [field: SerializeField] public Sprite ViewSprite { get; private set; }
         [field: SerializeField] public float Acceleration { get; private set; }
         [field: SerializeField] public float Deceleration { get; private set; }

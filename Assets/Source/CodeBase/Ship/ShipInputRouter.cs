@@ -1,10 +1,11 @@
-﻿using UnityEngine.InputSystem;
+﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Assets.Source.CodeBase.Ship
 {
     public class ShipInputRouter : IUpdatable
     {
-        private readonly PlayerInput _playerInput = new PlayerInput();
+        private readonly PlayerInput _playerInput;
         private readonly InertionMove _inertionMove;
         private readonly ShipRotator _shipRotator;
 
@@ -12,6 +13,8 @@ namespace Assets.Source.CodeBase.Ship
         {
             _inertionMove = inertionMove;
             _shipRotator = shipRotator;
+            _playerInput = new PlayerInput();
+            _playerInput.Enable();
         }
 
         public void Update(float tick)
@@ -30,6 +33,8 @@ namespace Assets.Source.CodeBase.Ship
 
         private bool CheckAccelerate()
         {
+            MonoBehaviour.print(_playerInput.Ship.MoveForward.phase == InputActionPhase.Performed);
+
             return _playerInput.Ship.MoveForward.phase == InputActionPhase.Performed;
         }
 

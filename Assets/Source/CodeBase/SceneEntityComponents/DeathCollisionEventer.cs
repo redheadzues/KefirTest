@@ -10,6 +10,12 @@ namespace Assets.Source.CodeBase.SceneEntityComponents
 
         public event Action<int> Died;
 
+        public void Construct(DeathChecker death, int id)
+        {
+            _death = death;
+            _entityId = id; 
+        }
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.TryGetComponent(out Collisionable collisionable))
